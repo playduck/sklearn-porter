@@ -5,7 +5,7 @@
 {method}
 
 int main(int argc, const char * argv[]) {{
-    float features[argc-1];
+    double features[argc-1];
     int i;
     for (i = 1; i < argc; i++) {{
         features[i-1] = atof(argv[i]);

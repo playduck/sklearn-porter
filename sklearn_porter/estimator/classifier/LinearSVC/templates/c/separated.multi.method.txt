@@ -1,4 +1,4 @@
-int {method_name} (float features[]) {{
+int {method_name} (double features[]) {{
     double class_val = -INFINITY;
     int class_idx = -1;
     int i, il, j, jl;

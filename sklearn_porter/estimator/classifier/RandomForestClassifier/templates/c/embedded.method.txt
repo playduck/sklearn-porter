@@ -1,5 +1,5 @@
 {methods}
-int {method_name} (float features[]) {{
+int {method_name} (double features[]) {{
     int n_classes = {n_classes};
     int classes[n_classes];
     int i;

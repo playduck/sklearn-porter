@@ -1,4 +1,4 @@
-int {method_name}(float features[{n_features}]) {{
+int {method_name}(double features[{n_features}]) {{
 
     int classes[{n_classes}];
     {branches}
