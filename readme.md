@@ -1,4 +1,16 @@
 
+# THIS IS A FORK
+
+This fork aims to update `scikit-learn` and its imports to Version `1.0.2`.
+This has been modified under python `3.7.9`.
+
+Install this fork using:
+
+`pip install git+https://github.com/playduck/sklearn-porter.git`
+
+---
+---
+
 # sklearn-porter
 
 [![GitHub license](https://img.shields.io/pypi/l/sklearn-porter.svg)](https://raw.githubusercontent.com/nok/sklearn-porter/master/license.txt)
