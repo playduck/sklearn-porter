@@ -4,9 +4,11 @@
 This fork aims to update `scikit-learn` and its imports to Version `1.0.2`.
 This has been modified under python `3.7.9`.
 
+Goal is the development of the C - Files for implementation on microcontroller.
+
 Install this fork using:
 
-`pip install git+https://github.com/playduck/sklearn-porter.git`
+`pip install git+https://github.com/DrBro23/sklearn-porter.git`
 
 ---
 ---
