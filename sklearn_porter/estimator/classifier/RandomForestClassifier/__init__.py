@@ -5,7 +5,7 @@ import os
 from json import encoder
 from json import dumps
 
-from sklearn.tree.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn_porter.estimator.classifier.Classifier import Classifier
 
 
