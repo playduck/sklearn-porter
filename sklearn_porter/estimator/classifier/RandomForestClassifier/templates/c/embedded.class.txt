@@ -93,13 +93,4 @@ int main() {{
         gpio_put(LED_PIN, 0);
     }}
     return 0;
-
-{% comment %} int main(int argc, const char * argv[]) {{
-    double features[argc-1];
-    int i;
-    for (i = 1; i < argc; i++) {{
-        features[i-1] = atof(argv[i]);
-    }}
-    printf("%d", {method_name}(features));
-    return 0; {% endcomment %}
 }}
