@@ -103,6 +103,8 @@ int main() {{
     gpio_set_dir(LED_PIN, GPIO_OUT);
 
     double features[N_FEATURES];
+    double start, end;
+    double execution_time;
 
     // printf("\n\n");
 
@@ -111,8 +113,15 @@ int main() {{
         gpio_put(LED_PIN, 1);
 
         getInputsFromUser(features, N_FEATURES);
+
+        start = get_absolute_time();
         int prediction = {method_name}(features, 0);
+        end = get_absolute_time();
+
+        execution_time = absolute_time_diff_us(start, end);
+
         printf("%d\n", prediction);
+        printf("lf\n", execution_time)
         
         gpio_put(LED_PIN, 0);
     }}
