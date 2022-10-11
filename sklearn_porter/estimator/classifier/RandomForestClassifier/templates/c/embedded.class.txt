@@ -97,7 +97,7 @@ int main() {{
         execution_time = absolute_time_diff_us(start, end);
 
         printf("%d\n", prediction);
-        printf("%lf\n", execution_time)
+        printf("%lf\n", execution_time);
         
         gpio_put(LED_PIN, 0);
     }}
