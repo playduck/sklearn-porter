@@ -68,12 +68,12 @@ void getInputsFromUser(double nums[], int count)   {{
             char* start = parseBuffer;
             strncpy(parseBuffer, buffer, BUFFER_LEN);
 
-            char *token = nullptr;
-            char *ptr = nullptr;
+            char *token = NULL;
+            char *ptr = NULL;
 
             for(int i = 0; i < numFloats; i++)  {{
-                if(!token) ptr = parsingBuffer;
-                else ptr = nullptr;
+                if(!token) ptr = parseBuffer;
+                else ptr = NULL;
 
                 token = strtok(ptr, " ");
                 nums[i] = atof(token);
