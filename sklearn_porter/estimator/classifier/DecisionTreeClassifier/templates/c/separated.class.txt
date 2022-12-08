@@ -107,13 +107,13 @@ int main() {{
     while(1)
     {{
         if ((led_counter % 50) == 0)
-        {
+        {{
             gpio_put(LED_PIN, 1);
-        }
+        }}
         else if ((led_counter % 25) == 0)
-        {
+        {{
             gpio_put(LED_PIN, 0);
-        }
+        }}
         counter += 1;
         
         getInputsFromUser(features, N_FEATURES);
