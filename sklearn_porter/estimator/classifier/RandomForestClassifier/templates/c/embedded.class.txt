@@ -79,7 +79,7 @@ int main() {{
     double features[N_FEATURES];
     double start, end;
     double execution_time;
-    int counter = 0;
+    int led_counter = 0;
 
     while(1)
     {{
@@ -91,7 +91,7 @@ int main() {{
         {{
             gpio_put(LED_PIN, 0);
         }}
-        counter += 1;
+        led_counter += 1;
         
         getInputsFromUser(features, N_FEATURES);
 
