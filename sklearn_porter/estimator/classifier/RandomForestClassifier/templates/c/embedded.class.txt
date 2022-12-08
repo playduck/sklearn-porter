@@ -6,6 +6,8 @@
 
 const uint LED_PIN = 25;
 
+#define N_FEATURES 4
+
 {method}
 
 void clrbuf(uint8_t* buf, size_t len) {{
@@ -21,7 +23,6 @@ void getInputsFromUser(double nums[], int count)   {{
     char parseBuffer[BUFFER_LEN];
     int idx = 0;
     int numFloats = 0;
-    double f = 0.0F;
 
     clrbuf(buffer, BUFFER_LEN);
 
@@ -42,18 +43,16 @@ void getInputsFromUser(double nums[], int count)   {{
             // convert number
             char* start = parseBuffer;
             strncpy(parseBuffer, buffer, BUFFER_LEN);
+            
+            char *token = nullptr;
+            char *ptr = nullptr;
 
             for(int i = 0; i < numFloats; i++)  {{
-                char* end = memchr(start, ' ', BUFFER_LEN);
-                if(end == NULL) {{
-                    end = parseBuffer + BUFFER_LEN;
-                }}
+                if(!token) ptr = parsingBuffer;
+                else ptr = nullptr;
 
-                int len = end - start;
-                strncpy(parseBuffer, start, len);
-
-                nums[i] = atof(parseBuffer);
-                start = end + 1;
+                token = strtok(ptr, " ");
+                nums[i] = atof(token);
             }}
             return;
 
@@ -88,7 +87,7 @@ int main() {{
     {{
         gpio_put(LED_PIN, 1);
 
-        getInputsFromUser(features, 4);
+        getInputsFromUser(features, N_FEATURES);
 
         start = get_absolute_time();
         int prediction = predict(features);
@@ -96,6 +95,11 @@ int main() {{
 
         execution_time = absolute_time_diff_us(start, end);
 
+        printf("%lf\n", features[0]);
+        printf("%lf\n", features[1]);
+        printf("%lf\n", features[2]);
+        printf("%lf\n", features[3]);
+        
         printf("%d\n", prediction);
         printf("%lf\n", execution_time);
         
