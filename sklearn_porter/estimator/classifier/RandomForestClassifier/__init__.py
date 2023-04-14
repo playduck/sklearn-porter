@@ -94,9 +94,9 @@ class RandomForestClassifier(Classifier):
             target_method=target_method, **kwargs)
 
         # Check type of base estimators:
-        if not isinstance(estimator.base_estimator, DecisionTreeClassifier):
+        if not isinstance(estimator.estimator, DecisionTreeClassifier):
             msg = "The classifier doesn't support the given base estimator %s."
-            raise ValueError(msg, estimator.base_estimator)
+            raise ValueError(msg, estimator.estimator)
 
         # Check number of base estimators:
         if not estimator.n_estimators > 0:
