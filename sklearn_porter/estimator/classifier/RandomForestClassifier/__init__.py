@@ -138,7 +138,7 @@ class RandomForestClassifier(Classifier):
         self.estimators = [est.estimators_[idx] for idx
                            in range(est.n_estimators)]
         self.n_estimators = len(self.estimators)
-        self.n_features = est.estimators_[0].n_features_
+        self.n_features = est.estimators_[0].n_features_in_
         self.n_classes = est.n_classes_
 
         if self.target_method == 'predict':
