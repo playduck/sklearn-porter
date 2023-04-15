@@ -1,15 +1,113 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
+#include <pico/stdlib.h>
+
+const uint LED_PIN = 25;
+
+#define N_FEATURES 4
 
 {method}
 
-int main(int argc, const char * argv[]) {{
-    double features[argc-1];
-    int i;
-    for (i = 1; i < argc; i++) {{
-        features[i-1] = atof(argv[i]);
+void clrbuf(uint8_t* buf, size_t len) {{
+    for(size_t i = 0; i < len; i++) {{
+        buf[i] = '\0';
     }}
-    printf("%d", {method_name}(features));
+}}
+
+void getInputsFromUser(double nums[], int count)   {{
+    const int BUFFER_LEN = 256;
+    char c;
+    char buffer[BUFFER_LEN];
+    char parseBuffer[BUFFER_LEN];
+    int idx = 0;
+    int numFloats = 0;
+
+    clrbuf(buffer, BUFFER_LEN);
+
+    // flush stdin
+    while(getchar_timeout_us(100) != PICO_ERROR_TIMEOUT);
+
+    while(1)    {{
+        c = getchar(); // read from user
+        // printf("%c", c);    // echo input
+
+        if(idx >= BUFFER_LEN)    {{
+            c = ' ';    // abort
+        }}
+
+        if(c == '\r')    {{
+            numFloats++;
+
+            // convert number
+            char* start = parseBuffer;
+            strncpy(parseBuffer, buffer, BUFFER_LEN);
+            
+            char *token = NULL;
+            char *ptr = NULL;
+
+            for(int i = 0; i < numFloats; i++)  {{
+                if(!token) ptr = parseBuffer;
+                else ptr = NULL;
+
+                token = strtok(ptr, " ");
+                nums[i] = atof(token);
+            }}
+            return;
+
+        }}   else if(c == ' ')   {{
+            numFloats++;
+            buffer[idx++] = c;
+        }}   else if(c == 127 || c == 8)    {{
+            --idx; // backspace or delete
+            // printf("\b");
+        }}   else    {{
+            // append input to buffer
+            buffer[idx++] = c;
+        }}
+    }}
+}}
+
+
+int main() {{
+    stdio_init_all();
+
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+
+    double features[N_FEATURES];
+    double start, end;
+    double execution_time;
+    int led_counter = 0;
+
+    while(1)
+    {{
+        if ((led_counter % 50) == 0)
+        {{
+            gpio_put(LED_PIN, 1);
+        }}
+        else if ((led_counter % 25) == 0)
+        {{
+            gpio_put(LED_PIN, 0);
+        }}
+        led_counter += 1;
+        
+        getInputsFromUser(features, N_FEATURES);
+
+        start = get_absolute_time();
+        int prediction = predict(features);
+        end = get_absolute_time();
+
+        execution_time = absolute_time_diff_us(start, end);
+
+        printf("%lf\n", features[0]);
+        printf("%lf\n", features[1]);
+        printf("%lf\n", features[2]);
+        printf("%lf\n", features[3]);
+
+        printf("%d\n", prediction);
+        printf("%lf\n", execution_time);
+    }}
     return 0;
 }}

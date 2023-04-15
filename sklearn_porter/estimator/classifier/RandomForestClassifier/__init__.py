@@ -5,7 +5,7 @@ import os
 from json import encoder
 from json import dumps
 
-from sklearn.tree.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn_porter.estimator.classifier.Classifier import Classifier
 
 
@@ -94,9 +94,9 @@ class RandomForestClassifier(Classifier):
             target_method=target_method, **kwargs)
 
         # Check type of base estimators:
-        if not isinstance(estimator.base_estimator, DecisionTreeClassifier):
+        if not isinstance(estimator.estimator, DecisionTreeClassifier):
             msg = "The classifier doesn't support the given base estimator %s."
-            raise ValueError(msg, estimator.base_estimator)
+            raise ValueError(msg, estimator.estimator)
 
         # Check number of base estimators:
         if not estimator.n_estimators > 0:
@@ -138,7 +138,7 @@ class RandomForestClassifier(Classifier):
         self.estimators = [est.estimators_[idx] for idx
                            in range(est.n_estimators)]
         self.n_estimators = len(self.estimators)
-        self.n_features = est.estimators_[0].n_features_
+        self.n_features = est.estimators_[0].n_features_in_
         self.n_classes = est.n_classes_
 
         if self.target_method == 'predict':

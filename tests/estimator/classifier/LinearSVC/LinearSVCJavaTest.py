@@ -31,17 +31,17 @@ class LinearSVCJavaTest(Java, Classifier, ExportedData, TestCase):
             ('reduce_dim', PCA()),
             ('classify', LinearSVC())
         ])
-        n_features_options = [2, 4, 8]
+        n_features_in_options = [2, 4, 8]
         c_options = [1, 10, 100, 1000]
         param_grid = [
             {
                 'reduce_dim': [PCA(iterated_power=7), NMF()],
-                'reduce_dim__n_components': n_features_options,
+                'reduce_dim__n_components': n_features_in_options,
                 'classify__C': c_options
             },
             {
                 'reduce_dim': [SelectKBest(chi2)],
-                'reduce_dim__k': n_features_options,
+                'reduce_dim__k': n_features_in_options,
                 'classify__C': c_options
             },
         ]
